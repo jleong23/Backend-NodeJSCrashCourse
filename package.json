@@ -1,0 +1,26 @@
+{
+  "name": "backend-nodejs",
+  "version": "1.0.0",
+  "description": "a tutorial for intro to backend/nodejs",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "url": "git+ssh://git@github.com/jleong23/Backend-NodeJSCrashCourse.git"
+  },
+  "author": "Jason Leong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jleong23/Backend-NodeJSCrashCourse/issues"
+  },
+  "homepage": "https://github.com/jleong23/Backend-NodeJSCrashCourse#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongoose": "^8.20.0",
+    "nodemon": "^3.1.11"
+  }
+}
