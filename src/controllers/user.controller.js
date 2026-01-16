@@ -2,7 +2,7 @@ import { User } from "../models/user.model.js";
 
 const registerUser = async (req, res) => {
   try {
-    const { userName, email, password } = red.body;
+    const { userName, email, password } = req.body;
 
     //! Basic validation
     if (!userName || !email || !password)
@@ -42,6 +42,20 @@ const registerUser = async (req, res) => {
       error: error.message,
     });
   }
+};
+
+const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    // Check if user exists
+    const userExists = await User.findOne({
+      email: email.toLowerCase(),
+    });
+    if (!userExists)
+      return res.status(400).json({
+        message: "User Not Found",
+      });
+  } catch {}
 };
 
 export { registerUser };
