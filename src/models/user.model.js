@@ -7,7 +7,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      lowerCase: true,
+      lowercase: true,
       trim: true, // trimming white spaces in string ( matilda mong: will become matildamong)
       minLength: 1,
       maxLength: 30,
@@ -24,7 +24,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
-      lowerCase: true,
+      lowercase: true,
       trim: true, // trimming white spaces in string ( matilda mong: will become matildamong)
       minLength: 1,
       maxLength: 30,
@@ -34,7 +34,7 @@ const userSchema = new Schema(
 );
 
 // before saving any password, we need to hash it
-userSchema.prev("save", async function (next) {
+userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   this.password = await bcrypt.hash(this.password, 10);
 

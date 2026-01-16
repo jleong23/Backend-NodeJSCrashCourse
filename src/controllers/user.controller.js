@@ -51,32 +51,31 @@ const loginUser = async (req, res) => {
     const userExists = await User.findOne({
       email: email.toLowerCase(),
     });
-    if (!userExists)
-      return res.status(400).json({
-        message: "User Not Found",
-      });
 
+    if (!userExists) {
+      return res.status(400).json({ message: "User Not Found" });
+    }
     // compare passwords
-    const isMatch = await user.comparePassword(password);
-    if (!isMatch)
-      return res.status(400).json({
-        message: "Invalid Password",
-      });
-
+    const isMatch = await userExists.comparePassword(password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid Password" });
+    }
     // Once login is succesful
     res.status(200).json({
       message: "Login Successful",
       user: {
-        id: user._id,
-        email: user.email,
-        userName: user.userName,
+        id: userExists._id,
+        email: userExists.email,
+        userName: userExists.userName,
       },
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({
       message: "Internal Server Error",
+      error: error.message,
     });
   }
 };
 
-export { registerUser };
+export { registerUser, loginUser };
