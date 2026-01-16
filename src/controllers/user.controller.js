@@ -57,7 +57,26 @@ const loginUser = async (req, res) => {
       });
 
     // compare passwords
-  } catch {}
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch)
+      return res.status(400).json({
+        message: "Invalid Password",
+      });
+
+    // Once login is succesful
+    res.status(200).json({
+      message: "Login Successful",
+      user: {
+        id: user._id,
+        email: user.email,
+        userName: user.userName,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
 };
 
 export { registerUser };
